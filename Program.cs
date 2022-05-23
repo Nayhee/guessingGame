@@ -9,17 +9,30 @@ namespace guessingGame
         {
             int secretNumber = 42;
             
-            Console.WriteLine("Guess the secret number!");
-            string userGuessString = Console.ReadLine();
-            int userGuess = int.Parse(userGuessString);
-
-            if(secretNumber == userGuess) 
+            int guessFunc()
             {
-                Console.WriteLine("Wow! That's Correct! Great Guess!");
+                Console.WriteLine("Guess the secret number!");
+                string userGuessString = Console.ReadLine();
+                int userGuess = int.Parse(userGuessString);
+                return userGuess;   
             }
-            else 
+
+            int guess = guessFunc();
+            int count = 1;
+            while(count < 4)
             {
-                Console.WriteLine("Nope! Try again!");
+                if(secretNumber == guess) 
+                {
+                    Console.WriteLine("Wow! That's Correct! Great Guess!");
+                    break;
+                }
+                else 
+                {
+                    Console.WriteLine("Nope! Try again!");
+                    Console.WriteLine($"Your guess {count}");
+                    count++;
+                }
+                guess = guessFunc();
             }
         }
     }
