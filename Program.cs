@@ -11,7 +11,7 @@ namespace guessingGame
             int secretNumber = r.Next(1,101);
             Console.WriteLine($"secret number is {secretNumber}");
 
-            int captureDifficulty()
+            int CaptureDifficulty()
             {
                 Console.WriteLine("Select a difficulty");
                 Console.WriteLine("1) Easy");
@@ -23,9 +23,9 @@ namespace guessingGame
                 return difficultyInt;
             }
             
-            int difficultySelection()
+            int DifficultySelection()
             {
-                int difficultySelector = captureDifficulty();
+                int difficultySelector = CaptureDifficulty();
 
                 if(difficultySelector == 3)
                 {
@@ -48,7 +48,7 @@ namespace guessingGame
                 }
             };
 
-            int guessFunc()
+            int GuessFunc()
             {
                 Console.WriteLine("Guess the secret number!");
                 string userGuessString = Console.ReadLine();
@@ -56,9 +56,9 @@ namespace guessingGame
                 return userGuess;   
             }
 
-            int userDifficulty = difficultySelection();
+            int userDifficulty = DifficultySelection();
             int count = 0;
-            int guess = guessFunc();
+            int guess = GuessFunc();
 
             while(count != userDifficulty)
             {
