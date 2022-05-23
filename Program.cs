@@ -7,7 +7,10 @@ namespace guessingGame
     {
         static void Main(string[] args)
         {
-            int secretNumber = 42;
+            Random r = new Random();
+            int secretNumber = r.Next(1,101);
+            Console.WriteLine(secretNumber);
+
             
             int guessFunc()
             {
@@ -18,8 +21,8 @@ namespace guessingGame
             }
 
             int guess = guessFunc();
-            int count = 1;
-            while(count < 4)
+            int guessesLeft = 4;
+            while(guessesLeft > 1)
             {
                 if(secretNumber == guess) 
                 {
@@ -28,9 +31,18 @@ namespace guessingGame
                 }
                 else 
                 {
-                    Console.WriteLine("Nope! Try again!");
-                    Console.WriteLine($"Your guess {count}");
-                    count++;
+                    guessesLeft--;
+                    
+                    if(guess > secretNumber)
+                    {
+                        Console.WriteLine("Nope! Your guess was too high!");
+                    }
+                    else   
+                    {
+                        Console.WriteLine("Nope! Your guess was too low!");
+                    }
+                    Console.WriteLine($"Guesses left: {guessesLeft}");
+
                 }
                 guess = guessFunc();
             }
