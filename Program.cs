@@ -9,9 +9,45 @@ namespace guessingGame
         {
             Random r = new Random();
             int secretNumber = r.Next(1,101);
-            Console.WriteLine(secretNumber);
+            Console.WriteLine($"secret number is {secretNumber}");
 
+            int captureDifficulty()
+            {
+                Console.WriteLine("Select a difficulty");
+                Console.WriteLine("1) Easy");
+                Console.WriteLine("2) Medium");
+                Console.WriteLine("3) Hard");
+                Console.WriteLine("4) Cheater");
+                string difficultySelection = Console.ReadLine();
+                int difficultyInt = int.Parse(difficultySelection);
+                return difficultyInt;
+            }
             
+            int difficultySelection()
+            {
+                int difficultySelector = captureDifficulty();
+
+                if(difficultySelector == 3)
+                {
+                    return 3;
+                }
+                else if(difficultySelector == 2)
+                {
+                    return 5;
+                }
+                else if(difficultySelector == 1)
+                {
+                    return 7;
+                }
+                else if(difficultySelector == 4)
+                {
+                    return -1;
+                }
+                else {
+                    return 0;
+                }
+            };
+
             int guessFunc()
             {
                 Console.WriteLine("Guess the secret number!");
@@ -20,18 +56,20 @@ namespace guessingGame
                 return userGuess;   
             }
 
+            int userDifficulty = difficultySelection();
+            int count = 0;
             int guess = guessFunc();
-            int guessesLeft = 4;
-            while(guessesLeft > 1)
+
+            while(count != userDifficulty)
             {
-                if(secretNumber == guess) 
+                if(secretNumber == guess ) 
                 {
-                    Console.WriteLine("Wow! That's Correct! Great Guess!");
+                    Console.WriteLine($"Wow! That's Correct! Great Guess! The number was {guess}");
                     break;
                 }
                 else 
                 {
-                    guessesLeft--;
+                    count++;
                     
                     if(guess > secretNumber)
                     {
@@ -41,10 +79,21 @@ namespace guessingGame
                     {
                         Console.WriteLine("Nope! Your guess was too low!");
                     }
-                    Console.WriteLine($"Guesses left: {guessesLeft}");
-
+                    if(userDifficulty != -1)
+                    {
+                        Console.WriteLine($"Guesses left: {userDifficulty - count + 1}");
+                    }
+                    guess = guessFunc();
                 }
-                guess = guessFunc();
+                if(count == userDifficulty && guess != secretNumber)
+                {
+                    Console.WriteLine("YOU WERE NEVER ABLE TO GUESS THE NUMBER. Sorry!!");
+                }
+                else if (count == userDifficulty && guess == secretNumber) 
+                {
+                    Console.WriteLine($"Wow! That's Correct! Great Guess! The number was {guess}");
+                }
+
             }
         }
     }
